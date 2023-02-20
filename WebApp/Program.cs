@@ -46,7 +46,6 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-
             await context.Response.WriteAsync("An exception was thrown.");
 
         }

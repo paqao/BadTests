@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -59,10 +60,16 @@ namespace IntegrationTests.TestEngine
                         (context, sc) =>
                         {
                             startup.ConfigureServices(context, sc);
+                            this.ConfigureTestServices(sc);
                         })
                     .Build();
 
             return host.Services;
+        }
+
+        private void ConfigureTestServices(IServiceCollection sc)
+        {
+            // Add scrutor
         }
     }
 }
