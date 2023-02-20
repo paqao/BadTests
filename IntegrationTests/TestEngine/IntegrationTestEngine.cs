@@ -1,8 +1,10 @@
 ﻿using Logic.CommandHandlers;
 using Logic.Commands;
 using Logic.DTOs;
+using Logic.Models;
 using Logic.Queries;
 using Logic.QueryHandlers;
+using Logic.Services;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,8 @@ namespace IntegrationTests.TestEngine
     {
         public IServiceProvider _serviceProvider { get; private set; }
 
+        public IRepository<BusinessProcess> BusinessProcessRepository { get; private set; }
+
         public async Task DisposeAsync()
         {
 
@@ -42,6 +46,8 @@ namespace IntegrationTests.TestEngine
             var updateCommandHandler = _serviceProvider.GetRequiredService<ICommandHandler<UpdateProcessCommand, BusinessProcessDto>>();
             var getItemByIdQueryHandler = _serviceProvider.GetRequiredService<IQueryHandler<GetItemById, BusinessProcessDto>>();
             Processes = new ProcessController(approveCommandHandler, createCommandHandler, getItemByIdQueryHandler, updateCommandHandler);
+
+            BusinessProcessRepository = _serviceProvider.GetRequiredService<IRepository<BusinessProcess>>();
         }
 
         private IServiceProvider GetServiceProvider()

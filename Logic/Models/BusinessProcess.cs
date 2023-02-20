@@ -20,5 +20,6 @@ namespace Logic.Models
         public string Author { get; set; }
         public string Division { get; set; }
         public string Comment { get; set; }
+        public int DocumentsCount { get; set; }
     }
 }

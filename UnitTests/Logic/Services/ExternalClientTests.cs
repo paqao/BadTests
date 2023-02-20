@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace UnitTests.Logic.Services
 {
@@ -28,11 +29,11 @@ namespace UnitTests.Logic.Services
             var httpClient = new HttpClient(mock.Object);
             var client = new ExternalClient(httpClient);
 
-            var response = await client.CountItems();
             // act
-
+            var response = await client.CountItems();
 
             // assert
+            response.Should().Be(3);
         }
     }
 }

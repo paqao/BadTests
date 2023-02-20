@@ -1,3 +1,4 @@
+using FluentAssertions;
 using IntegrationTests.TestEngine;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,13 +22,22 @@ namespace IntegrationTests
         }
 
         [Fact]
-        public async Task HelloWorldTest()
+        public async Task SimplyTest()
         {
             // Arrange
-            var data = _testEngine.Processes.ApproveBusinessProcessAsync(1);
+            var testItem = await _testEngine.BusinessProcessRepository.Create(new Logic.Models.BusinessProcess
+            {
+                Status = Logic.Const.BusinessProcessConstants.Status.New,
+                Division = "IT"
+            });
 
-            //var url = _testEngine.
+            // Act
+            var data = await _testEngine.Processes.ApproveBusinessProcessAsync(testItem.Id);
 
+            // Assert
+            data.Division.Should().Be("IT");
+            data.Status.Should().Be(Logic.Const.BusinessProcessConstants.Status.Approved);
         }
+
     }
 }
