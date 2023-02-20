@@ -12,13 +12,23 @@ using WebApp.Controllers;
 
 namespace IntegrationTests
 {
-    public class ControllerTests : IClassFixture<IntegrationTestEngine>
+    public class ControllerTests : IAsyncLifetime
     {
         private readonly IntegrationTestEngine _testEngine;
 
-        public ControllerTests(IntegrationTestEngine testEngine)
+        public ControllerTests()
         {
-            _testEngine = testEngine;
+            _testEngine = new IntegrationTestEngine();
+        }
+
+        public Task DisposeAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task InitializeAsync()
+        {
+            await _testEngine.InitializeAsync();
         }
 
         [Fact]

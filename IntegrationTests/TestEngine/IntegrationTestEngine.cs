@@ -48,6 +48,8 @@ namespace IntegrationTests.TestEngine
             Processes = new ProcessController(approveCommandHandler, createCommandHandler, getItemByIdQueryHandler, updateCommandHandler);
 
             BusinessProcessRepository = _serviceProvider.GetRequiredService<IRepository<BusinessProcess>>();
+
+            await Task.Delay(10000);
         }
 
         private IServiceProvider GetServiceProvider()
