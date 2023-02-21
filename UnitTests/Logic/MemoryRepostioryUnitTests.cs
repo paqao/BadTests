@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Logic
 {
+
+    [Trait("Type", "Unit")]
+    [Trait("Kind", "Repository")]
     public class MemoryRepostioryUnitTests
     {
         [Fact]

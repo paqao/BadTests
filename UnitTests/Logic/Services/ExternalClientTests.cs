@@ -11,6 +11,9 @@ using FluentAssertions;
 
 namespace UnitTests.Logic.Services
 {
+
+    [Trait("Type", "Unit")]
+    [Trait("Kind", "Service")]
     public class ExternalClientTests
     {
         [Fact]
