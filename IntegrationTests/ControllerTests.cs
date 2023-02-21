@@ -12,6 +12,8 @@ using WebApp.Controllers;
 
 namespace IntegrationTests
 {
+    [Trait("Type", "Integration")]
+    [Trait("Kind", "Controller")]
     public class ControllerTests : IAsyncLifetime
     {
         private readonly IntegrationTestEngine _testEngine;
