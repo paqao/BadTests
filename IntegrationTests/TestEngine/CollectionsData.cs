@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationTests.TestEngine
 {
-    [CollectionDefinition("CTE")]
+    [CollectionDefinition("ITE")]
     public class CollectionsData : ICollectionFixture<IntegrationTestEngine>
     {
     }

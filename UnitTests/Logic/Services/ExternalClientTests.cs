@@ -22,7 +22,7 @@ namespace UnitTests.Logic.Services
             // arrange
             var httpResponse = new HttpResponseMessage
             {
-                Content = new StringContent("3")
+                Content = new StringContent("4")
             };
             var mock = new Mock<HttpMessageHandler>();
 
@@ -36,7 +36,7 @@ namespace UnitTests.Logic.Services
             var response = await client.CountItems();
 
             // assert
-            response.Should().Be(3);
+            response.Should().Be(4);
         }
     }
 }

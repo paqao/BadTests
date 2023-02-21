@@ -36,7 +36,7 @@ namespace Logic.CommandHandlers
                 throw new ValidationException(typeof(BusinessProcess).Name, command.ProcessId, "Process should have new status");
             }
 
-            item.UpdateDate = DateTime.Now;
+            item.UpdateDate = DateTime.UtcNow;
             item.Status = Const.BusinessProcessConstants.Status.Approved;
 
             await _businessProcessRepository.Update(item);

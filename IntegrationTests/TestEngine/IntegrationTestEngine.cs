@@ -49,7 +49,7 @@ namespace IntegrationTests.TestEngine
 
             BusinessProcessRepository = _serviceProvider.GetRequiredService<IRepository<BusinessProcess>>();
 
-            await Task.Delay(10000);
+            await Task.Delay(3000);
         }
 
         private IServiceProvider GetServiceProvider()
@@ -77,6 +77,7 @@ namespace IntegrationTests.TestEngine
 
         private void ConfigureTestServices(IServiceCollection sc)
         {
+
             // Add scrutor
         }
     }

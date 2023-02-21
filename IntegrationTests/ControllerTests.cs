@@ -14,24 +14,16 @@ namespace IntegrationTests
 {
     [Trait("Type", "Integration")]
     [Trait("Kind", "Controller")]
-    public class ControllerTests : IAsyncLifetime
+    [Collection("ITE")]
+    public class ControllerTests 
     {
         private readonly IntegrationTestEngine _testEngine;
 
-        public ControllerTests()
+        public ControllerTests(IntegrationTestEngine testEngine)
         {
-            _testEngine = new IntegrationTestEngine();
+            _testEngine = testEngine;
         }
 
-        public Task DisposeAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        public async Task InitializeAsync()
-        {
-            await _testEngine.InitializeAsync();
-        }
 
         [Fact]
         public async Task SimplyTest()
@@ -51,5 +43,40 @@ namespace IntegrationTests
             data.Status.Should().Be(Logic.Const.BusinessProcessConstants.Status.Approved);
         }
 
+        [Fact]
+        public async Task SimplyTest2()
+        {
+            // Arrange
+            var testItem = await _testEngine.BusinessProcessRepository.Create(new Logic.Models.BusinessProcess
+            {
+                Status = Logic.Const.BusinessProcessConstants.Status.New,
+                Division = "IT"
+            });
+
+            // Act
+            var data = await _testEngine.Processes.ApproveBusinessProcessAsync(testItem.Id);
+
+            // Assert
+            data.Division.Should().Be("IT");
+            data.Status.Should().Be(Logic.Const.BusinessProcessConstants.Status.Approved);
+        }
+
+        [Fact]
+        public async Task SimplyTest3()
+        {
+            // Arrange
+            var testItem = await _testEngine.BusinessProcessRepository.Create(new Logic.Models.BusinessProcess
+            {
+                Status = Logic.Const.BusinessProcessConstants.Status.New,
+                Division = "IT"
+            });
+
+            // Act
+            var data = await _testEngine.Processes.ApproveBusinessProcessAsync(testItem.Id);
+
+            // Assert
+            data.Division.Should().Be("IT");
+            data.Status.Should().Be(Logic.Const.BusinessProcessConstants.Status.Approved);
+        }
     }
 }

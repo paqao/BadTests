@@ -12,8 +12,14 @@ namespace UnitTests.Logic
 
     [Trait("Type", "Unit")]
     [Trait("Kind", "Repository")]
-    public class MemoryRepostioryUnitTests
+    public class MemoryRepostioryUnitTests 
     {
+        private readonly MemoryRepository<TestingModel> _memoryRepository;
+        public MemoryRepostioryUnitTests()
+        {
+            _memoryRepository = new MemoryRepository<TestingModel>();
+        }
+
         [Fact]
         public async Task When_GetAll_Then_ReturnsAllStoredItems()
         {
@@ -62,6 +68,7 @@ namespace UnitTests.Logic
             // Assert
             item.Should().BeNull();
         }
+
 
         class TestingModel : IModel
         {
