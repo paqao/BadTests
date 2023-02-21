@@ -26,14 +26,16 @@ namespace UnitTests.Logic
             items.First().Id.Should().Be(1);
         }
 
+        [MemberData(nameof(GetTestItems))]
         [InlineData(1, "test1")]
         [InlineData(2, "test2")]
+        [ClassData(typeof(ClassDataSource))]
         [Theory]
         public async Task When_GetItemById_Then_ReturnSpecifiedItem(int id, string name)
         {
             // Arrange
             var repository = new MemoryRepository<TestingModel>(new TestingModel(1, "test1"), new TestingModel(2, "test2"),
-                new TestingModel(3, "test3"));
+                new TestingModel(3, "test3"), new TestingModel(4, "test4"));
 
             // Act
             var item = await repository.GetById(id);
@@ -68,6 +70,21 @@ namespace UnitTests.Logic
 
             public int Id { get; set; }
             public string Name { get; set; }
+        }
+
+        public static IEnumerable<object[]> GetTestItems => new List<object[]>
+        {
+            new object[] { 3, "test3" }
+        };
+
+        public class ClassDataSource : IEnumerable<object[]>
+        {
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                yield return new object[] { 4, "test4" };
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }
