@@ -14,7 +14,7 @@ namespace UnitTests.Logic.Services
     public class ExternalClientTests
     {
         [Fact]
-        public async Task TestIfProperServiceIsRequested()
+        public async Task When_ClientSendProperRequest_Then_ResultIsParsed()
         {
             // arrange
             var httpResponse = new HttpResponseMessage
